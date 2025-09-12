@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdint>
-#include <random>
 namespace abit62 {
 	inline uint64_t pcg=1;
 	inline bool init(const void* const ptr) { // pointer adress is pretty random
