@@ -1,0 +1,6 @@
+*.vim
+*.swo
+*.swp
+quickbuild.*
+debug/
+src/main.cpp
