@@ -2,13 +2,13 @@
 
 very small and efficient generator of random base62 strings
 
-### instalation
+### installation
 
 [download `abit62.hpp` from this repository](/src/abit62.hpp)
 
 put it into your c++ project
 
-now its done
+done
 
 ### TL;DR: usage
 
@@ -17,7 +17,7 @@ now its done
 #include <cstring>
 int main() {
     char base62[17]={}; // array for a 16-chars string
-    abit62::init(base62); // initializing random with some pointer. returns bool
+    abit62::init(base62); // initializing random with any pointer. returns bool
     memset(base62,1,16); // fill with non-zeros 16-chars keeping 17th as zero
     abit62::string(base62); // fills passed string with random base62. returns bool
 }
@@ -34,19 +34,19 @@ this library includes:
 
 make char array (with size always less or equal 256)
 
-`char base62[17]={}` - 17 because i want 16 symbols and the last one always needs to be `'\0'`
+`char base62[17]={}` - 17 because i want 16 symbols and the last one always needs to be the null terminator
 
-fill it with something that not `'\0'` and keep the last element as `'\0'` so it will be a C-string
+fill with any values except the null terminator to explicitly indicate the end of the array
 
-`memset(base62,1,16)` - just for an example i will fill it with 1
+`memset(base62,1,16)` - the actual number does not matter, but i prefer using `1`, just ensure it is not the null terminator
 
-then initialize rng with some pointer
+then initialize rng with any pointer
 
 `abit62::init(base62)` - it will use its address in memory as a seed
 
 and then generate your string
 
-`abit62::string(base62)` - and now your variable now contains a random base62 C-string
+`abit62::string(base62)` - your variable now contains a random base62 C-string
 
 you can cout it if you want
 
@@ -54,9 +54,13 @@ you can cout it if you want
 
 ### performance
 
-on my linux VM it takes around ~145µs to generate one 16-symbols base62 string
+on alpine linux VM with musl, generating a 16-symbol base62 random-string takes ~145µs; the test program was built w/ static linking because w/o/ performance decreases :(
 
 you can check it yourself
+
+here is my compiler args:
+
+`x86_64-alpine-linux-musl-g++ -static -std=c++20 src/*.cpp -o ./debug/abit62`
 
 here is my script for testing:
 
