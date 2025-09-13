@@ -2,6 +2,14 @@
 
 very small and efficient generator of random base62 strings
 
+### instalation
+
+[download `abit62.hpp` from this repository](/src/abit62.hpp)
+
+put it into your c++ project
+
+now its done
+
 ### TL;DR: usage
 
 ```cpp
@@ -26,23 +34,23 @@ this library includes:
 
 make char array (with size always less or equal 256)
 
-    `char base62[17]={}` - 17 because i want 16 symbols and the last one always needs to be `'\0'`
+`char base62[17]={}` - 17 because i want 16 symbols and the last one always needs to be `'\0'`
 
 fill it with something that not `'\0'` and keep the last element as `'\0'` so it will be a C-string
 
-    `memset(base62,1,16)` - just for an example i will fill it with 1
+`memset(base62,1,16)` - just for an example i will fill it with 1
 
 then initialize rng with some pointer
 
-    `abit62::init(base62)` - it will use its address in memory as a seed
+`abit62::init(base62)` - it will use its address in memory as a seed
 
 and then generate your string
 
-    `abit62::string(base62)` - and now your variable is contains a random base62 C-string
+`abit62::string(base62)` - and now your variable now contains a random base62 C-string
 
 you can cout it if you want
 
-    `std::cout<<"result: "<<base62<<std::endl`
+`std::cout<<"result: "<<base62<<std::endl`
 
 ### performance
 
