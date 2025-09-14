@@ -14,7 +14,6 @@ done
 
 ```cpp
 #include "abit62.hpp"
-#include <cstring>
 int main() {
     char base62[17]{}; // array for a 16-char string
     abit62::init(base62); // initializing random with any pointer. returns bool as success/fail
