@@ -16,10 +16,9 @@ done
 #include "abit62.hpp"
 #include <cstring>
 int main() {
-    char base62[17]={}; // array for a 16-chars string
-    abit62::init(base62); // initializing random with any pointer. returns bool
-    memset(base62,1,16); // fill with non-zeros 16-chars keeping 17th as zero
-    abit62::string(base62); // fills passed string with random base62. returns bool
+    char base62[17]{}; // array for a 16-char string
+    abit62::init(base62); // initializing random with any pointer. returns bool as success/fail
+    abit62::string(base62,16); // fills passed range (16 chars) with random base62. returns bool as success/fail
 }
 ```
 
@@ -32,21 +31,17 @@ this library includes:
 
 ### most regular usage
 
-make char array (with size always less or equal 256)
+make char array (with size always less or equal 257)
 
-`char base62[17]={}` - 17 because i want 16 symbols and the last one always needs to be the null terminator
-
-fill with any values except the null terminator to explicitly indicate the end of the array
-
-`memset(base62,1,16)` - the actual number does not matter, but i prefer using `1`, just ensure it is not the null terminator
+`char base62[17]{}` - 17 because i want 16 symbols and the last one needs to be the null terminator
 
 then initialize rng with any pointer
 
 `abit62::init(base62)` - it will use its address in memory as a seed
 
-and then generate your string
+and then generate 16-char string
 
-`abit62::string(base62)` - your variable now contains a random base62 C-string
+`abit62::string(base62,16)` - variable now contains a random base62 C-string
 
 you can cout it if you want
 
@@ -54,22 +49,22 @@ you can cout it if you want
 
 ### performance
 
-on alpine linux VM with musl, generating a 16-symbol base62 random-string takes ~145µs; the test program was built w/ static linking because w/o/ performance decreases :(
+on alpine linux VM with musl, generating a 16-symbol base62 random-string takes ~135µs; the test program was built w/ static linking because w/o/ performance decreases
 
 you can check it yourself
 
 here is my compiler args:
 
-`x86_64-alpine-linux-musl-g++ -static -std=c++20 src/*.cpp -o ./debug/abit62`
+`g++ -static -std=c++20 src/*.cpp -o ./debug/abit62`
 
 here is my script for testing:
 
 ```cpp
 #include "abit62.hpp"
 int main() {
-    char test_string[17]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0};
+    char test_string[17]{};
     abit62::init(test_string);
-    abit62::string(test_string);
+    abit62::string(test_string,16);
 }
 ```
 

@@ -3,17 +3,12 @@
 namespace abit62 {
 	inline uint64_t pcg=1;
 	inline bool init(const void* const ptr) { // pointer adress is pretty random
-		if(!ptr) return false;
+		if(!ptr)return false;
 		pcg=reinterpret_cast<uintptr_t>(ptr);
 		return true;
 	}
-	inline bool string(char* const ic) {
+	inline bool string(char* const ic,uint8_t icend) { // maximum length is 256 chars
 		if(!ic)return false;
-		uint8_t icend=0; // maximum length is 255 chars
-		for(;;++icend) {
-			if(ic[icend]=='\0')break;
-			if(icend>=255)return false;
-		}
 		for(uint8_t i=0;i<icend;++i) {
 			pcg=pcg*6364136223846793005ULL+1442695040888963407ULL; // PCG const's
 			uint8_t tc=(pcg>>32)%62;
