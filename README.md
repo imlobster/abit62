@@ -4,7 +4,7 @@ very small and efficient generator of random base62 strings
 
 ### installation
 
-[download `abit62.hpp` from this repository](/src/abit62.hpp)
+[download `abit62.hpp` from this repository](/src/abit62.hpp) or from the "Releases"
 
 put it into your c++ project
 
