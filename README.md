@@ -1,6 +1,14 @@
 ### abit62
 
-very small and efficient generator of random base62 strings
+very small and efficient generator of random base62 strings, such as these:
+
+`tiNpA4Dj2RADKl1i`
+
+`Oq8sxA`
+
+`js0uTpb4tsCEK83znRZGji0s`
+
+<sub>(created using abit62 - the library you are currently viewing)</sub>
 
 ### installation
 
