@@ -30,7 +30,7 @@ this library includes:
 
 ### most regular usage
 
-make char array (with size always less or equal 257)
+make char array (with size less or equal 256 for regular usage)
 
 `char base62[17]{}` - 17 because i want 16 symbols and the last one needs to be the null terminator
 
@@ -85,7 +85,7 @@ int main() {
     // test init
     char base62[count_of_symbols+1]{};
     abit62::init(base62);
-    // end test prepare
+    // end test init
 
     long long total_ns = 0;
 
