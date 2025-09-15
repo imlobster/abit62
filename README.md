@@ -48,7 +48,20 @@ you can cout it if you want
 
 ### performance
 
-on alpine linux VM with musl, generating a 16-symbol base62 random-string takes ~135µs; the test program was built w/ static linking because w/o/ performance decreases
+benchmarks on almost empty alpine linux VM:
+
+```
+255 symbols / 1'000'000 iters:
+Mean time: 720.487 ns
+
+16 symbols / 10'000'000 iters:
+Mean time: 64.6329 ns
+
+1 symbol / 100'000'000 iters:
+Mean time: 24.4968 ns
+```
+
+the test program was built w/ static linking because w/o/ performance decreases
 
 you can check it yourself
 
@@ -59,12 +72,40 @@ here is my compiler args:
 here is my script for testing:
 
 ```cpp
+#include <iostream>
+#include <chrono>
 #include "abit62.hpp"
+
 int main() {
-    char test_string[17]{};
-    abit62::init(test_string);
-    abit62::string(test_string,16);
+    using namespace std::chrono;
+
+    const int iterations = 10'000'000;
+    constexpr int count_of_symbols = 16;
+
+    // test init
+    char base62[count_of_symbols+1]{};
+    abit62::init(base62);
+    // end test prepare
+
+    long long total_ns = 0;
+
+    for (int i = 0; i < iterations; ++i) {
+        auto start = high_resolution_clock::now();
+
+        // test code
+        abit62::string(base62,count_of_symbols);
+        // end test code
+
+        auto end = high_resolution_clock::now();
+        total_ns += duration_cast<nanoseconds>(end - start).count();
+    }
+
+    // mean
+    double mean = static_cast<double>(total_ns) / iterations;
+
+    std::cout << "Mean time: " << mean << " ns\n";
+    std::cout << "Result string: " << base62 << std::endl;
+
+    return 0;
 }
 ```
-
-before testing: add cout to your script to be sure that it really works
