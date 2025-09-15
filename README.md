@@ -8,7 +8,7 @@ very small and efficient generator of random base62 strings, such as these:
 
 `js0uTpb4tsCEK83znRZGji0s`
 
-<sub>(created using abit62 - the library you are currently viewing)</sub>
+<sub>(examples above were generated using abit62 - the library you are currently viewing)</sub>
 
 ### installation
 
